@@ -1,0 +1,8 @@
+python-telegram-bot
+gunicorn
+gevent
+Flask
+SQLAlchemy
+passlib
+Werkzeug
+googletrans==4.0.0-rc1

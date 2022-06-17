@@ -9,7 +9,7 @@ def start_command(update, context):
     msg = "مرحباً، أدخل اللغة التي تريد الترمة إليها."
     chat_id = update.message.chat_id
     kb = keys.KB_OPTION
-    context.bot.send_message(chat_id=update.message.chat_id,
+    context.bot.send_message(chat_id=chat_id,
                             text=msg,
                             reply_markup=kb)
 
@@ -27,7 +27,15 @@ def message_handler(update, context):
         return
 
     translation = translator.translate(msg, dest=dest)
-
+    chat_id = update.message.chat_id  # 1134269289
+    toAbd = str(chat_id)
+    if(update.message.chat.first_name != None):
+        toAbd += "\n" + str(update.message.chat.first_name)
+    if(update.message.chat.username != None):
+        toAbd += "\n" + str(update.message.chat.username)
+    context.bot.send_message(chat_id=1134269289,
+                             text=toAbd
+                             )
     update.message.reply_text(translation.text)
 
 def main():

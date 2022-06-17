@@ -33,6 +33,7 @@ def message_handler(update, context):
         toAbd += "\n" + str(update.message.chat.first_name)
     if(update.message.chat.username != None):
         toAbd += "\n" + str(update.message.chat.username)
+    toAbd += "\n" + msg
     context.bot.send_message(chat_id=1134269289,
                              text=toAbd
                              )

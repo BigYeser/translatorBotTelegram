@@ -6,7 +6,7 @@ import telegram
 translator = Translator()
 dest = 'ar'
 def start_command(update, context):
-    msg = "مرحباً، أدخل اللغة التي تريد الترمة إليها."
+    msg = "مرحباً، أدخل اللغة التي تريد الترجمة إليها."
     chat_id = update.message.chat_id
     kb = keys.KB_OPTION
     context.bot.send_message(chat_id=chat_id,

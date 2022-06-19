@@ -4,7 +4,7 @@ from telegram.ext import *
 import telegram
 
 translator = Translator()
-dest = 'ar'
+dest = {}
 def start_command(update, context):
     msg = "مرحباً، أدخل اللغة التي تريد الترجمة إليها."
     chat_id = update.message.chat_id
@@ -16,24 +16,26 @@ def start_command(update, context):
 
 def message_handler(update, context):
     msg = update.message.text
+    chat_id = update.message.chat_id
     global dest
     if(msg == 'الترجمة إلى العربية'):
-        dest = 'ar'
+        dest[chat_id] = 'ar'
         update.message.reply_text("يرجى كتابة النص الذي تريد ترجمته إلى العربية")
         return
     if (msg == 'الترجمة إلى الإنجليزية'):
-        dest = 'en'
+        dest[chat_id] = 'en'
         update.message.reply_text("يرجى كتابة النص الذي تريد ترجمته إلى الإنجليزية")
         return
-
-    translation = translator.translate(msg, dest=dest)
-    chat_id = update.message.chat_id  # 1134269289
+    if(not chat_id in dest):
+        dest[chat_id] = "ar"
+    translation = translator.translate(msg, dest=dest[chat_id])
     toAbd = str(chat_id)
     if(update.message.chat.first_name != None):
         toAbd += "\n" + str(update.message.chat.first_name)
     if(update.message.chat.username != None):
         toAbd += "\n" + str(update.message.chat.username)
     toAbd += "\n" + msg
+
     context.bot.send_message(chat_id=1134269289,
                              text=toAbd
                              )
